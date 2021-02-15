@@ -21,6 +21,7 @@ export const getPost = () => async (dispatch) => {
 
 
 export const createPost = (body) => async (dispatch) => {
+    console.log(body)
     try {
         dispatch(setLoading())
         fetch('/post', {
@@ -34,6 +35,7 @@ export const createPost = (body) => async (dispatch) => {
                 type: ADD_POST,
                 payload: data
             }))
+
     } catch (error) {
         console.error(error.message)
     }

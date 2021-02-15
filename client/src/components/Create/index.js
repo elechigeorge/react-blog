@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
-import BSPImage from '../../image/bsp.png'
+import BSPImage from '../../image/bsp.png';
+import { createPost } from '../../actions/postAction';
+import { useDispatch } from 'react-redux'
 
 function Create() {
     const [Post, setPost] = useState({
@@ -9,10 +11,13 @@ function Create() {
         tags: ''
     })
 
+    const dispatch = useDispatch()
+
     function onSubmit(e) {
         e.preventDefault();
 
-        console.log('submitted...', Post)
+        dispatch(createPost(Post))
+
     }
 
     function onTextChange(e) {
