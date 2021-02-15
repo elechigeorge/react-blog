@@ -1,11 +1,28 @@
-import { GET_POST, DELETE_POST, LOADING, ADD_POST } from './types';
+import { GET_POST, GET_POSTS, DELETE_POST, LOADING, ADD_POST } from './types';
 
 
 
-export const getPost = () => async (dispatch) => {
+export const getPosts = () => async (dispatch) => {
     try {
         dispatch(setLoading())
         fetch('/post')
+            .then(response => response.json())
+            .then(data => dispatch({
+                type: GET_POSTS,
+                payload: data
+            }
+            ))
+
+
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+export const getPost = (id) => async (dispatch) => {
+    try {
+        dispatch(setLoading())
+        fetch(`/post/${id}`)
             .then(response => response.json())
             .then(data => dispatch({
                 type: GET_POST,

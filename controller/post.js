@@ -11,6 +11,15 @@ module.exports = {
             res.status(500).send({ msg: "Server error" + error.message })
         }
     },
+    getPost: async function (req, res) {
+        try {
+            const post = await Post.findById(req.params.id);
+
+            res.status(200).send(post)
+        } catch (error) {
+            res.status(500).send({ msg: "Server error" + error.message })
+        }
+    },
 
     // NEW POST
     createPost: async function (req, res) {
