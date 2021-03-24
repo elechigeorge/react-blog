@@ -5,25 +5,22 @@ const Model = require('mongoose').model;
 
 
 const UserSchema = new Schema({
+    avatar: {
+        type: String
+    },
     name: {
         type: String,
         required: true
     },
     email: {
-        type: String,
-        required: true
+        type: String
     },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     username: {
         type: String,
         defaut: "USER00002"
-    },
-    posts: {
-        type: Schema.Types.ObjectId,
-        ref: "Post"
     },
     followers: {
         type: String,
@@ -33,10 +30,13 @@ const UserSchema = new Schema({
         type: String,
         default: 0
     },
-    postCount: {
-        type: String,
-        default: 0
-    }
+    likes: [
+        {
+            user: {
+                type: Schema.Types.ObjectId
+            }
+        }
+    ],
 
 });
 

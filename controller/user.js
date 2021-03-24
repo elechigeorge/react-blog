@@ -1,5 +1,10 @@
 const User = require('../Model/user');
 const mongoose = require('mongoose');
+const gravatar = require('gravatar');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { check, validationResult } = require('express-validator');
+const normalize = require('normalize-url');
 
 
 
