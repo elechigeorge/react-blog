@@ -10,9 +10,11 @@ function Post(props) {
     return (
         <div>
             <Container>
+
                 <h1>Recent publications</h1>
+                <hr />
                 {
-                    props.posts.length < 1 ? <h2> Loading...</h2> :
+                    props.posts.length < 1 ? <h2> Please wait...</h2> :
                         (
                             props.posts.map((post) => {
                                 return (
@@ -22,7 +24,7 @@ function Post(props) {
                                             <p>Published <Moment fromNow>{post.createdAt}</Moment></p>
                                             <h2>{post.title}</h2>
                                             <Button variant="success" className="bg-md">
-                                                <Link to={`/post/${post._id}`}>Read more</Link>
+                                                <Link style={{ textDecoration: 'none', color: 'white' }} to={`/post/${post._id}`}>Read more</Link>
                                             </Button>
                                         </ListGroup.Item>
                                     </ListGroup>

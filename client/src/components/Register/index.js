@@ -26,8 +26,9 @@ function Register() {
                                 <Form.Control type="text" placeholder="Username" />
                             </Form.Group>
                             <Form.Group controlId="exampleForm.ControlSelect1">
-                                <Form.Label>Example select</Form.Label>
+                                <Form.Label>Department</Form.Label>
                                 <Form.Control as="select">
+                                    <option>default</option>
                                     <option>Computer Science</option>
                                     <option>Science Lab Technology</option>
                                     <option>Business Administration</option>

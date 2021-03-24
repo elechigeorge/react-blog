@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Navbar from './components/Navigation/defaultNav';
 import Login from './components/Login';
 import PostDetails from './components/Post/postDetails';
+import Dashboard from './components/Dashboard'
 import {
   BrowserRouter as Router,
   Route,
@@ -35,6 +36,7 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path="/create" component={Create} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/post/:id" component={PostDetails} />
         </Switch>
       </div>

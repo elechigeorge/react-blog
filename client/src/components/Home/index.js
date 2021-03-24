@@ -17,7 +17,7 @@ function HomePage() {
 
                                 <Button variant="success" className="mr-3 btn-success btn-lg">Signup Today</Button>
                             </p>
-                            <p>build your best skill for self reliance... </p>
+                        <p>build your best skill for self reliance... </p>_
                         </Col>
 
                         <Col md={6} sm={6} lg={6}>

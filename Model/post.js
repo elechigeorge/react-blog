@@ -9,14 +9,34 @@ const postSchema = mongoose.Schema({
     body: {
         type: String
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    },
     tags: {
         type: [String],
         index: true
     },
     comments: [
         {
-            body: String,
-            date: Date
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'users'
+            },
+            text: {
+                type: String,
+                required: true
+            },
+            name: {
+                type: String
+            },
+            avatar: {
+                type: String
+            },
+            date: {
+                type: Date,
+                default: Date.now
+            }
         }
     ],
     published: {
@@ -31,6 +51,6 @@ const postSchema = mongoose.Schema({
 
 mongoose.plugin(timestamp)
 
-const PostSchema = mongoose.model('PostSchema', postSchema);
+const Post = mongoose.model('Post', postSchema);
 
-module.exports = PostSchema;
+module.exports = Post;

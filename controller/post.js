@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Post = require('../Model/post')
+const Post = require('../Model/post');
 
 module.exports = {
     getPosts: async function (req, res) {
@@ -25,17 +25,25 @@ module.exports = {
     createPost: async function (req, res) {
 
 
+
         try {
-            const newPost = new Post(req.body)
+           
 
-            const _newpost = await newPost.save();
+                const newPost = new Post({
+                    title: req.body.title,
+                    body: req.body.body,
+                    tags: req.body.tags,
+                    user: req.user
+                })
 
-            res.status(201).send({ msg: "created", newPost })
+                await newPost.save();
+
+                res.status(201).send({ msg: "created", newPost })
 
 
-        } catch (error) {
-            res.status(500).send({ msg: "Server error" + error.message })
+            } catch (error) {
+                res.status(500).send({ msg: "Server error" + error.message })
+            }
+
         }
-
-    }
 }

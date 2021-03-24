@@ -18,7 +18,6 @@ function defaultNav() {
                         <Nav className="mr-auto ">
                             <Nav.Link href="/posts">Posts</Nav.Link>
                             <Nav.Link target="_blank" href="https://github.com/elechigeorge">Github</Nav.Link>
-
                         </Nav>
                         <Nav>
                             <Nav.Link href="/register">Signup</Nav.Link>
