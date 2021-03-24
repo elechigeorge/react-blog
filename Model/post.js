@@ -43,10 +43,13 @@ const postSchema = mongoose.Schema({
         type: Boolean,
         default: true
     },
-    like: {
-        type: Number,
-        default: 0
-    }
+    likes: [
+        {
+            user: {
+                type: mongoose.Schema.Types.ObjectId
+            }
+        }
+    ]
 });
 
 mongoose.plugin(timestamp)
