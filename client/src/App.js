@@ -1,47 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import Routes from './components/routing/Routes';
+import { LOGOUT } from './actions/types';
+
+// Redux
+import { Provider } from 'react-redux';
+import store from './store';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
+
 import './App.css';
-import Posts from './components/Posts';
-import { useDispatch } from 'react-redux';
-import { getPosts } from './actions/postAction';
-import Home from './components/Home';
-import Navbar from './components/Navigation/defaultNav';
-import Login from './components/Login';
-import PostDetails from './components/Post/postDetails';
-import Dashboard from './components/Dashboard'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom'
-import Register from './components/Register';
-import Create from './components/Create';
 
-
-function App() {
-
-  const dispatch = useDispatch();
-
+const App = () => {
   useEffect(() => {
-    dispatch(getPosts())
-  }, [dispatch]);
+    // check for token in LS
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    store.dispatch(loadUser());
 
+    // log user out from all tabs if they log out in one tab
+    window.addEventListener('storage', () => {
+      if (!localStorage.token) store.dispatch({ type: LOGOUT });
+    });
+  }, []);
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path='/posts' component={Posts} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path="/create" component={Create} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/post/:id" component={PostDetails} />
-        </Switch>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route component={Routes} />
+          </Switch>
+        </Fragment>
+      </Router>
+    </Provider>
   );
-}
+};
 
 export default App;
