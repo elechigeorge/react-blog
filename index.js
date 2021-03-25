@@ -13,6 +13,7 @@ server.use(cors())
 // API ROUTES
 server.use('/post', require('./routes/post.js'));
 server.use('/account', require('./routes/user.js'))
+server.use('/auth', require('./routes/auth.js'))
 
 // database connection 
 mongoose

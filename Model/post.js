@@ -14,8 +14,7 @@ const postSchema = mongoose.Schema({
         ref: 'post'
     },
     tags: {
-        type: [String],
-        index: true
+        type: String
     },
     comments: [
         {

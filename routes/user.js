@@ -11,6 +11,22 @@ const normalize = require('normalize-url');
 
 
 
+
+
+// @route    POST api/users
+// @desc     Register user
+// @access   Public
+router.get('/', async (req, res) => {
+    try {
+        const user = await User.find().select('-password');
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+})
+
+
 // @route    POST api/users
 // @desc     Register user
 // @access   Public
@@ -28,7 +44,7 @@ router.post(
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { name, email, password } = req.body;
+        const { name, email, password, username } = req.body;
 
         try {
             let user = await User.findOne({ email });
@@ -52,7 +68,8 @@ router.post(
                 name,
                 email,
                 avatar,
-                password
+                password,
+                username
             });
 
             const salt = await bcrypt.genSalt(10);
@@ -82,5 +99,7 @@ router.post(
         }
     }
 );
+
+
 
 module.exports = router;
