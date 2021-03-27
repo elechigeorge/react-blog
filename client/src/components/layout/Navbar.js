@@ -3,58 +3,62 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import {
+    Navbar,
+    Nav,
+    Container
+} from 'react-bootstrap';
 
-const Navbar = ({ auth: { isAuthenticated }, logout }) => {
+const NavbarSetup = ({ auth: { isAuthenticated }, logout }) => {
     const authLinks = (
-        <ul>
-            <li>
-                <Link to="/profiles">Developers</Link>
-            </li>
-            <li>
-                <Link to="/posts">Posts</Link>
-            </li>
-            <li>
-                <Link to="/dashboard">
-                    <i className="fas fa-user" />{' '}
-                    <span className="hide-sm">Dashboard</span>
-                </Link>
-            </li>
-            <li>
-                <a onClick={logout} href="#!">
-                    <i className="fas fa-sign-out-alt" />{' '}
-                    <span className="hide-sm">Logout</span>
-                </a>
-            </li>
-        </ul>
+        <div>
+            <Navbar expand="lg" className="text-light bg-success">
+                <Container>
+                    <Navbar.Brand href="/">Blogging System</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto ">
+                            <Nav.Link href="/posts">Posts</Nav.Link>
+                            <Nav.Link href="/dashboard">Github</Nav.Link>
+                        </Nav>
+                        <Nav>
+
+                            <Nav.Link href="/login" onClick={logout}>Logout</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </div>
     );
 
     const guestLinks = (
-        <ul>
-            <li>
-                <Link to="/profiles">Developers</Link>
-            </li>
-            <li>
-                <Link to="/register">Register</Link>
-            </li>
-            <li>
-                <Link to="/login">Login</Link>
-            </li>
-        </ul>
+        <div>
+            <Navbar expand="lg" className="text-light bg-success">
+                <Container>
+                    <Navbar.Brand href="/">Blogging System</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto ">
+                            <Nav.Link target="_blank" href="https://github.com/elechigeorge">Github</Nav.Link>
+                        </Nav>
+                        <Nav>
+                            <Nav.Link href="/register">Signup</Nav.Link>
+                            <Nav.Link href="/login">Login</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </div>
     );
 
     return (
-        <nav className="navbar bg-dark">
-            <h1>
-                <Link to="/">
-                    <i className="fas fa-code" /> DevConnector
-        </Link>
-            </h1>
-            <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
-        </nav>
+
+        <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+
     );
 };
 
-Navbar.propTypes = {
+NavbarSetup.propTypes = {
     logout: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 };
@@ -63,4 +67,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout })(NavbarSetup);

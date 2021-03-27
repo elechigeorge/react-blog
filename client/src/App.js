@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
+import Home from './components/Home';
 import Routes from './components/routing/Routes';
 import { LOGOUT } from './actions/types';
 
@@ -29,13 +30,13 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Fragment>
+        <div style={{ marginBottm: "12px" }}>
           <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route component={Routes} />
           </Switch>
-        </Fragment>
+        </div>
       </Router>
     </Provider>
   );
